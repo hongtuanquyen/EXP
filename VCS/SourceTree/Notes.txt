@@ -1,0 +1,3 @@
+Khi muon clone ve 1 project, ta khong the su dung SSH key duoc tao ra tu lenh ssh-key cua Gitbase ma nen convert lai sao .ppk 
+
+https://stackoverflow.com/questions/27129904/pageant-refuses-to-load-ssh-2-key-generated-with-gitbash

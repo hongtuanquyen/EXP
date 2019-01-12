@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Coding Assessment</title>
+    <style>
+
+        body{
+            background-color: #252323;
+             margin: 40px;
+        }
+
+        div{
+            margin: 16px;
+            padding: 10px;
+        }
+        .movies {
+            color: black;
+            text-align: center;
+        }
+
+        .movies[debug] {
+           white-space: pre;
+        }
+
+        .rowHighLight{
+            background-color: #333232;
+            box-shadow: 18px 10px 5px #1b1919;
+        }
+
+        asset {
+            width: 186px;
+            height: 270px;
+            background-color: grey;
+            display: inline-block;
+            position:relative;
+            transition: all 300ms ease;
+            padding: 5px; 
+               margin: 16px;
+               outline: none;
+        }
+
+        asset:after {
+            content: attr(data-title);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0,0,0,.50);
+            color: white;
+            height: 64px;
+            line-height: 64px;
+            text-align: center;
+            font-size: 14pt;
+        }
+
+        .borderColor {
+            border-style: solid;
+            border-color: red;
+            border-size: 5px;
+            transform: scale(1.15); 
+            z-index: 10000000;
+            box-shadow: 10px 10px 5px #e6e2e1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='movies' class="movies">
+        <carousel data-currentindex=0 data-row=0></carousel>
+    </div>
+    <div id='moviesAction' class="movies">
+        <carousel data-currentindex=0 data-row=1></carousel>
+    </div>
+    <div id='moviesCrime' class="movies">
+        <carousel data-currentindex=0 data-row=2></carousel>
+    </div>
+    <script>
+        /**        
+        * START HERE
+        * ==========
+        *
+        * - Use vanilla Javascript
+        * - The code below is not perfect, we expect you to improve some of it.
+        * - Show in the code that you have some knowledge of ES6
+        *
+        * ASSIGNMENT - NETFLIX LIKE CATALOGUE
+        * ===================================
+        * 1. Create 3 rows. One row for every genre. ['Action', 'Crime', 'Drama']
+        * 2. Create a movie poster selection indicator. (This can be a line, a border, a colored rectangle, etc. Use your imagination.)
+        * 3. Add up/down keys for selection between the different rows.
+        * 4. Animate the rows when the user presses up/down
+        *
+        * Good luck!
+        */
+        const data = { "id": "my_area_collections", "data": [{ "id": "movies_for_you", "title": "Movies for you", "type": "assets", "assets": [{ "id": "the_descendants", "title": "The Descendants", "url": "/asset_descendants", "genre": "Crime", "type": "1", "imdb": "7.4", "img": "http://212.142.46.137/images_progtest/box_descendants.png" }, { "id": "avatar", "title": "Avatar", "url": "/series_breaking_bad", "genre": "Action", "type": "1", "imdb": "5.7", "img": "http://212.142.46.137/images_progtest/box_avatar.png" }, { "id": "argo", "title": "Argo", "genre": "Crime", "type": "1", "imdb": "8.7", "img": "http://212.142.46.137/images_progtest/box_argo.png" }, { "id": "quantum_of_solace", "title": "Quantum of Solace", "genre": "Action", "type": "1", "imdb": "5.4", "img": "http://212.142.46.137/images_progtest/box_quantum_of_solace.png" }, { "id": "slumdog_millionaire", "title": "Slumdog Millionaire", "genre": "Drama", "type": "1", "imdb": "7.2", "img": "http://212.142.46.137/images_progtest/box_slumdog_millionaire.png" }, { "id": "The_Kings_speech", "title": "The King's speech", "genre": "Drama", "type": "1", "imdb": "7.4", "img": "http://212.142.46.137/images_progtest/box_the_kings_speech.png" }, { "id": "Good_Night_and_Good_Luck", "title": "Good Night, and Good Luck.", "genre": "Drama", "type": "1", "imdb": "7.4", "img": "http://212.142.46.137/images_progtest/box_good_night_and_good_luck.png" }, { "id": "Brick_Mansions", "title": "Brick Mansions", "genre": "Action", "type": "1", "imdb": "7.4", "img": "http://212.142.46.137/images_progtest/box_brick_mansions.png" }, { "id": "Breaking_Bad", "title": "Breaking Bad", "genre": "Crime", "type": "1", "imdb": "7.4", "url": "/series_breaking_bad", "img": "http://212.142.46.137/images_progtest/box_breaking_bad.png" }] }] };
+
+        class Carousel {
+
+            constructor(element, data) {
+                this.element = element;
+                this.data = data;
+                this.data.forEach((asset) => {
+                    this.element.appendChild(document.createElement('asset'));
+                });
+                this.alignDataset();
+                this.mapToKeyboardEvents();
+                this.upDownKeyboardEvents();
+                this.clickMovie();
+            }
+
+            static selectDefault(element){
+               
+                element.setAttribute('class','borderColor');
+                element.setAttribute("tabindex", 0);
+                element.focus();
+            }
+
+            unSelectMovies(){
+                var assets = document.getElementsByTagName('asset');
+                for(let i=0;i< assets.length;i++) {
+                    assets[i].classList.remove('borderColor')
+                    }
+            }
+
+            next() {
+                this.currentIndex++;
+                this.alignDataset();
+            }
+
+            previous() {
+                this.currentIndex--;
+                this.alignDataset();
+            }
+
+            manageRows(element){
+               // element.setAttribute('class','rowHighLight');
+            }
+
+            up(){
+                let row = Number(this.element.getAttribute('data-row'));
+                if(row){
+                    this.unSelectMovies();
+                    this.selectedMovie(document.getElementsByTagName('carousel')[row - 1].children[0]); 
+                    this.manageRows(document.getElementsByTagName('carousel')[row - 1].parentElement); 
+                }
+                 
+            }
+
+            down(){
+                let row = Number(this.element.getAttribute('data-row'));
+                if(row != 2){
+                    this.unSelectMovies();
+                    this.selectedMovie(document.getElementsByTagName('carousel')[row + 1].children[0]); 
+                    this.manageRows(document.getElementsByTagName('carousel')[row + 1].parentElement);
+                }
+            }
+
+            selectedMovie(element){
+                element.setAttribute('class','borderColor');
+                element.setAttribute("tabindex", 0);
+                element.focus();
+            }
+
+            get currentIndex() {
+                return parseInt(this.element.dataset.currentindex) || 0;
+            }
+
+            set currentIndex(val) {
+                if (val < 0) val = this.data.length - 1;
+                else if (val >= this.data.length) val = 0;
+                this.element.dataset.currentindex = val;
+            }
+
+            alignDataset() {
+                [...this.element.children].forEach((assetElement, i) => {
+                    const index = (i + this.currentIndex) % this.data.length;
+                    assetElement.dataset.title = this.data[index].title;
+                    assetElement.style.backgroundImage = `url(${this.data[index].img})`;
+                });
+            }
+
+            manageMovieClick(event){
+                this.unSelectMovies();
+                this.selectedMovie(event);
+            }
+
+            clickMovie() {
+                [...this.element.children].forEach((assetElement) => {
+                    assetElement.addEventListener('click', evt => {
+                            this.manageMovieClick(evt.target);
+                    });
+                });
+            }
+
+            upDownKeyboardEvents() {
+                
+                [...this.element.children].forEach((assetElement) => {
+                    assetElement.addEventListener('keydown', evt => {
+                        evt = evt || window.event;
+                            switch (evt.keyCode) {
+                                case 38: //up 
+                                    this.up();
+                                    
+                                    break;
+                                case 40: //down arrow
+                                    this.down();
+                                    break;
+                             }
+                    });
+                });
+            }
+
+
+            mapToKeyboardEvents() {
+
+                [...this.element.children].forEach((assetElement, i) => {
+                    
+                    assetElement.addEventListener('keydown', evt => {
+                    evt = evt || window.event;
+                    switch (evt.keyCode) {
+                        case 37: //Left arrow
+                            this.previous();
+                            break;
+                        case 39: //Right arrow
+                            this.next();
+                            break;
+                    }
+                })
+                
+                });
+            }
+
+            static get tagName() { return 'CAROUSEL' }
+
+            static initiateOnDomElement(rootElement, data) {
+                return [...rootElement.children]
+                    .filter(element => element.tagName === Carousel.tagName)
+                    .map(element => new Carousel(element, data));
+            }
+        }
+
+        (function () {
+            const movies = document.getElementById('movies');
+            const moviesAction = document.getElementById('moviesAction');
+            const moviesCrime = document.getElementById('moviesCrime');
+
+            const assets = data.data.reduce((accumulator, item) => {
+                accumulator.push(...item.assets);
+                return accumulator;
+            }, []).filter(asset => asset.genre === 'Drama');
+
+            const asset = data.data.reduce((accumulator, item) => {
+                accumulator.push(...item.assets);
+                return accumulator;
+            }, []).filter(asset => asset.genre === 'Action');
+
+            const asset1 = data.data.reduce((accumulator, item) => {
+                accumulator.push(...item.assets);
+                return accumulator;
+            }, []).filter(asset => asset.genre === 'Crime');
+
+            const carousels = Carousel.initiateOnDomElement(movies, assets);
+            Carousel.initiateOnDomElement(moviesAction, asset);
+            Carousel.initiateOnDomElement(moviesCrime, asset1);
+            Carousel.selectDefault(carousels[0].element.children[0]);
+        })();
+    </script>
+</body>
+
+</html>

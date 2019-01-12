@@ -1,0 +1,3 @@
+rmdir /S [ten folder]: xoa folder
+netstat -ano: cac port duoc dung su dung và PID
+taskkill /pid [so PID]: xoa ung dung dang dung port voi PID 
