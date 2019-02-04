@@ -35,4 +35,6 @@ BitBucket: dung gmail hongtuanquyen@gmail.com de dang nhap
 
            CDI: Bitbucket: hongtuanquyen_bi.....2
                 BitBucketCloud: hongtuanquyen1012
+
+gitlab: quyenht1_quyenht1@runsystem.net
 ZyD8mH8JPV
