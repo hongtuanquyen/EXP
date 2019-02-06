@@ -1,0 +1,32 @@
+﻿adb shell input text "RR" 
+adb shell input keyevent 82   
+
+RemoconApp
+git clone git@bitbucket.org:cdi-rd/connectedremocon.git
+RemoconServer
+git clone git@bitbucket.org:cdi-rd/connectedremoconserver.git
+
+
+MySQL:
+conecon-dev.cdocif8efzny.us-east-2.rds.amazonaws.com port: 3306
+username : cdimaster
+password : 8XQKU24B7i7H3LD
+
+
+Rule trước khi resolve bug:
+==============================
+Đối với bug hay leakage, khi log trên Jira
+- Status là Cancel nếu Resolution là Not a bug hoặc Duplicate
+- Status là In progress nếu Resolution là Doing hoặc Pending hoặc Need to confirm
+- Status là Closed nếu Resolution là Done hoặc Won't fix hoặc Can not Reproduce
+- Status là Resolve nếu Resolution là Fixed
+Đối với bug minor, normal:
+- Điền 2 field: Defect Origin và Cause Category
+Đối với bug major, critical và Leakage:
+- Điền 4 field: Defect Origin, Cause Category, Cause Analysis và Corrective Action.
+===================================
+
+KN:
+ListItem: tranh tinh trang marginLeft cua ListItem, set cho no bang 0. ket hop voi dung padding: 15.
+
+set flex cho ListItem (Xem SettingGroupDeviceContainer)
