@@ -1,19 +1,22 @@
-﻿adb shell input text "RR" 
+﻿$ React native real device commands: 
+adb shell input text "RR" 
 adb shell input keyevent 82   
 
-RemoconApp
+
+$ RemoconApp
 git clone git@bitbucket.org:cdi-rd/connectedremocon.git
 RemoconServer
 git clone git@bitbucket.org:cdi-rd/connectedremoconserver.git
 
 
-MySQL:
+$ MySQL:
 conecon-dev.cdocif8efzny.us-east-2.rds.amazonaws.com port: 3306
 username : cdimaster
 password : 8XQKU24B7i7H3LD
 
 
-Rule trước khi resolve bug:
+$ Chatwork:
+* Rule trước khi resolve bug:
 ==============================
 Đối với bug hay leakage, khi log trên Jira
 - Status là Cancel nếu Resolution là Not a bug hoặc Duplicate
@@ -26,7 +29,20 @@ Rule trước khi resolve bug:
 - Điền 4 field: Defect Origin, Cause Category, Cause Analysis và Corrective Action.
 ===================================
 
-KN:
+* Chị Nguyễn Phương Anh (21/01/2019, 15h37) - Link: https://www.chatwork.com/#!rid54338688-1139115382670381056
+chị có gởi mail sau khi review timesheet của dự án, tụi em check lại giúp chị file đính kèm trong mail nha
+chỗ nào chưa đúng tụi em cố gắng fix trong hôm nay để chị review lại vào ngày mai nhé
+chị list 1 số chỗ điểm chưa đúng dự án thường log chưa đúng nha:
+1. Daily/Weekly meeting chọn Project Management/Review
+2. Tìm hiểu kĩ thuật nào đó: Coding/Study
+3. Không log work nhiều task chung 1 lần log. VD: task A gồm Coding, Review Code, Test. 
+Đúng phải chia thành 3 lần log
+
+Ngoài ra, cần log đầy đủ các activity cho 1 task. Có task chỉ thấy hoạt động Code, không thấy hoạt động cho việc Review code và Test, nên không biết bên mình có đang thực hiện những hoạt động này không
+
+* Link: https://www.chatwork.com/#!rid54338688-1139115382670381056
+
+$ KN:
 ListItem: tranh tinh trang marginLeft cua ListItem, set cho no bang 0. ket hop voi dung padding: 15.
 
 set flex cho ListItem (Xem SettingGroupDeviceContainer)
