@@ -1,7 +1,11 @@
-﻿$ React native real device commands: 
+﻿respone ne {"timestamp":1550418378903,"status":503,"error":"Service Unavailable","exception":"jp.connected_design.icg.exception.ServiceUnavailableException","message":"Device or Gateway offline.","path":"/ih/v1/actions/ac_command"}
+
+$ React native real device commands: 
 adb shell input text "RR" 
 adb shell input keyevent 82   
 
+duykb@runsystem.net
+Gmo@1234
 
 $ RemoconApp
 git clone git@bitbucket.org:cdi-rd/connectedremocon.git
@@ -13,6 +17,10 @@ $ MySQL:
 conecon-dev.cdocif8efzny.us-east-2.rds.amazonaws.com port: 3306
 username : cdimaster
 password : 8XQKU24B7i7H3LD
+
+
+username: cdidev
+Hostname: remoconapp-dev.c4euph1wzq3v.ap-northeast-1.rds.amazonaws.com
 
 
 $ Chatwork:
@@ -46,3 +54,14 @@ $ KN:
 ListItem: tranh tinh trang marginLeft cua ListItem, set cho no bang 0. ket hop voi dung padding: 15.
 
 set flex cho ListItem (Xem SettingGroupDeviceContainer)
+
+
+App ID account:
+kieubaoduy141292@gmail.com
+Ba@d1412
+
+prottapp, sketch...:
+duykb@runsystem.net
+Gmo@1234
+
+
