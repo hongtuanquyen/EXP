@@ -20,6 +20,7 @@ password : 8XQKU24B7i7H3LD
 
 
 username: cdidev
+pass: oAZYxHH8uQ9S4iTX
 Hostname: remoconapp-dev.c4euph1wzq3v.ap-northeast-1.rds.amazonaws.com
 
 
